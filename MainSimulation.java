@@ -45,11 +45,26 @@ public class MainSimulation {
                 e.printStackTrace();
             }
         }
+        System.out.println("-");
         System.out.println("Cost Matrix (waiting time in minute(s)):");
         MatrixPrinter.printMatrix(costMatrix, lastAdded);
+        System.out.println("-");
+        System.out.println("Using Branch & Bound:");
         System.out.println("Matching:");
-        BatchedMatching bMatching = new BatchedMatching(lastAdded, costMatrix);
-        System.out.println("Average waiting time is " + bMatching.findMinCost()/lastAdded + " min");
+        long startTime = System.nanoTime();
+        BatchedMatchingBnB bMatchingBnB = new BatchedMatchingBnB(lastAdded, costMatrix);
+        System.out.println("Average waiting time is " + bMatchingBnB.findMinCost()/lastAdded + " min");
+        long endTime = System.nanoTime();
+        long executionTime = endTime - startTime;
+        System.out.println("Execution Time: " + executionTime/1_000_000.0 + " ms");
+        System.out.println("-");
+        System.out.println("Using Exhaustive Search (Brute Force):");
+        startTime = System.nanoTime();
+        BatchedMatchingBF bMatchingBF = new BatchedMatchingBF(lastAdded, costMatrix);
+        System.out.println("Average waiting time is " + bMatchingBF.findMinCost()/lastAdded + " min");
+        endTime = System.nanoTime();
+        executionTime = endTime - startTime;
+        System.out.println("Execution Time: " + executionTime/1_000_000.0 + " ms");
         scanner.close();
     }
 }

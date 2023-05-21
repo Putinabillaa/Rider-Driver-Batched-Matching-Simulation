@@ -1,11 +1,11 @@
 import java.util.PriorityQueue;
 
-public class BatchedMatching {
+public class BatchedMatchingBnB {
     private int N;
     private int[][] costMatrix;
     private boolean[] assigned;
 
-    BatchedMatching(int N, int[][] costMatrix){
+    BatchedMatchingBnB(int N, int[][] costMatrix){
         this.N = N;
         this.costMatrix = costMatrix;
         this.assigned = new boolean[N];
