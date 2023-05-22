@@ -11,7 +11,7 @@ class BatchedMatchingBF {
         this.minCost = Integer.MAX_VALUE;
     }
 
-    public int findMinCost() {
+    public int exhaustiveSearch() {
         generatePermutations(0, 0);
         return minCost;
     }

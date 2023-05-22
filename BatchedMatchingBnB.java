@@ -31,7 +31,7 @@ public class BatchedMatchingBnB {
         System.out.println("Rider " + (char) (min.getRiderID() + 'A') + " -> Driver " + (min.getDriverID() + 1) + " (" + costMatrix[min.getRiderID()][min.getDriverID()] + " min)");
     }
 
-    public int findMinCost() {
+    public int branchAndBound() {
         PriorityQueue<Node> pq = new PriorityQueue<>(new NodeComparator());
         Node root = new Node(-1, -1, new boolean[N], null);
         root.setPathCost(0);
