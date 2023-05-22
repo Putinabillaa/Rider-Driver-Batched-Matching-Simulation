@@ -3,20 +3,18 @@ import java.util.PriorityQueue;
 public class BatchedMatchingBnB {
     private int N;
     private int[][] costMatrix;
-    private boolean[] assigned;
 
     BatchedMatchingBnB(int N, int[][] costMatrix){
         this.N = N;
         this.costMatrix = costMatrix;
-        this.assigned = new boolean[N];
     }
 
-    public int calculateCost(int riderIdx) {
+    public int calculateCost(int riderIdx, boolean[] assigned) {
         int cost = 0;
         for (int i = riderIdx + 1; i < N; i++) {
             int min = Integer.MAX_VALUE;
             for (int j = 0; j < N; j++) {
-                if (!this.assigned[j] && costMatrix[i][j] < min) {
+                if (!assigned[j] && costMatrix[i][j] < min) {
                     min = this.costMatrix[i][j];
                 }
             }
@@ -35,7 +33,9 @@ public class BatchedMatchingBnB {
 
     public int findMinCost() {
         PriorityQueue<Node> pq = new PriorityQueue<>(new NodeComparator());
-        Node root = new Node(-1, -1, this.assigned, null, 0, 0);
+        Node root = new Node(-1, -1, new boolean[N], null);
+        root.setPathCost(0);
+        root.setCost(0);
         pq.add(root);
         while (!pq.isEmpty()) {
             Node min = pq.poll();
@@ -46,9 +46,9 @@ public class BatchedMatchingBnB {
             }
             for (int j = 0; j < N; j++) {
                 if (!min.getAssigned()[j]) {
-                    int childPathCost = min.getPathCost() + this.costMatrix[i][j];
-                    int childCost = childPathCost + calculateCost(i);
-                    Node child = new Node(i, j, min.getAssigned(), min, childPathCost, childCost);
+                    Node child = new Node(i, j, min.getAssigned(), min);
+                    child.setPathCost(min.getPathCost() + this.costMatrix[i][j]);
+                    child.setCost(child.getPathCost() + calculateCost(i, child.getAssigned()));
                     pq.add(child);
                 }
             }

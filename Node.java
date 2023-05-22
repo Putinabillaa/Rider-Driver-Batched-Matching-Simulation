@@ -8,14 +8,18 @@ class Node {
     private int driverID;
     private boolean[] assigned;
 
-    Node(int riderID, int driverID, boolean[] assigned, Node parent, int pathCost, int cost) {
+    Node(int riderID, int driverID, boolean[] assigned, Node parent) {
         this.assigned = assigned.clone();
         if(driverID != -1) this.assigned[driverID] = true;
         this.parent = parent;
         this.riderID = riderID;
         this.driverID = driverID;
-        this.pathCost = pathCost;
+    }
+    public void setCost(int cost) {
         this.cost = cost;
+    }
+    public void setPathCost(int pathCost) {
+        this.pathCost = pathCost;
     }
     public Node getParent() {
         return parent;
