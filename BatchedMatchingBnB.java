@@ -30,7 +30,7 @@ public class BatchedMatchingBnB {
             return;
         }
         printAssignments(min.getParent());
-        System.out.println("Rider " + (char) (min.getRiderID() + 'A') + " -> Driver " + min.getDriverID() + " (" + costMatrix[min.getRiderID()][min.getDriverID()] + " min)");
+        System.out.println("Rider " + (char) (min.getRiderID() + 'A') + " -> Driver " + (min.getDriverID() + 1) + " (" + costMatrix[min.getRiderID()][min.getDriverID()] + " min)");
     }
 
     public int findMinCost() {
