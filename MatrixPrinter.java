@@ -8,7 +8,7 @@ public class MatrixPrinter {
         // Print column labels
         System.out.print("         ");
         for (int i = 0; i < columns; i++) {
-            String paddedValue = String.format("%" + (paddingWidth) + "s", "Driver " + i);
+            String paddedValue = String.format("%" + (paddingWidth) + "s", "Driver " + (i + 1));
             System.out.print(paddedValue);
         }
         System.out.println();
