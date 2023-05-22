@@ -53,7 +53,6 @@ public class BatchedMatchingBnB {
                 }
             }
         }
-
         return -1;
     }
 }
